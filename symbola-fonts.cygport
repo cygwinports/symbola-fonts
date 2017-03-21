@@ -1,0 +1,27 @@
+inherit font
+
+NAME="symbola-fonts"
+VERSION=9.00
+RELEASE=1
+CATEGORY="X11"
+SUMMARY="Unicode symbol font"
+DESCRIPTION="Symbola was created with Mathematics and other technical documents
+in mind. It covers many scripts and symbols supported by Unicode."
+HOMEPAGE="http://users.teilar.gr/~g1951d/"
+SRC_URI="
+	${HOMEPAGE}/Symbola.zip
+	http://pkgs.fedoraproject.org/cgit/rpms/gdouros-symbola-fonts.git/plain/gdouros-symbola-fonts-fontconfig.conf
+"
+SRC_DIR=.
+
+ARCH=noarch
+
+src_compile() { :; }
+
+src_install() {
+	cd ${S}
+	fontinto ${NAME%-fonts}
+	dofont Symbola.ttf
+	newfontconf gdouros-symbola-fonts-fontconfig.conf 65-symbola.conf
+	dodoc Symbola.pdf
+}
